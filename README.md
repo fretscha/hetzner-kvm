@@ -25,7 +25,7 @@ Please post an issue in case somthing won't work.
 1. Log in with your rescue system password.
 
 ### Configure and install KVM host
-1. Replace  the value `host.example.tld` with the fully qualified domain name of your host.
+1. Replace the value `host.example.tld` with the fully qualified domain name of your host.
 1. In this example I used `SWRAID 0` for *striping* because I only have 2 x 240GB of diskspace. You are free to use `SWRAID 1` for *mirroring*. ;)
 1. We build
    ```bash
@@ -44,8 +44,8 @@ Please post an issue in case somthing won't work.
    IMAGE images/Ubuntu-1410-utopic-64-minimal.tar.gz
    EOF
    ```
-1. Partition and install the os as cofigured with the command ```installimage```. The script will create the partitions as defined, make the filesystems and mount them. Then the OS image is copied into the partitions and grub will install the boot sector to boot from the installed kernel.
-1. Reboot the server and  start from the newly installed OS. Keep in mind that the rescue password is still the initial root password on your system.
+1. Partition and install the os as configured with the command ```installimage```. The script will create the partitions as defined, make the filesystems and mount them. Then the OS image is copied into the partitions and grub will install the boot sector to boot from the installed kernel.
+1. Reboot the server and start from the newly installed OS. Keep in mind that the rescue password is still the initial root password on your system.
 
 ### Prepare the KVM host
 1. Login as user `root` and copy your public ssh key to the system.
