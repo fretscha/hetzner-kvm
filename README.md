@@ -78,8 +78,42 @@ Please post an issue in case somthing won't work.
 ### Configure Network
 After installing the kvm packages a *internal* private network should be installed. To add additional public IP some changes to the system are needed.
 
-**TODO**
-IP forwarding
-Public network
+To enable ip4 ip forwarding ensure to uncomment following in `/etc/sysctl.conf` for persistence
+```bash
+net.ipv4.ip_forward=1
+```
 
+For instant activation:
+```bash
+sysctl -p /etc/sysctl.conf
+```
+
+To add a public network `public1` to the configuration save the following to `public100.xml`. Replace The IP address and netmask with the one you recieved from Hetzner.
+```bash
+<network>
+  <name>public100</name>
+  <forward dev='eth0' mode='route'>
+  <interface dev='eth0'/>
+  </forward>
+  <bridge name='virbr100' stp='on' delay='0'/>
+  <ip address='xxx.xxx.xxx.xxx' netmask='255.255.255.xxx'>
+  </ip>
+</network>
+```
+
+```bash
+virsh net-create public100.xml
+```
+This will create the defined network.
+
+To autostart the network on boot, use the following `virsh` commands.
+
+```bash
+# because of a bug please, add a newline at the end of the file and save the file
+virsh net-edit public100
+# and now the autostart will work
+virsh net-autostart public100
+# show all available, active networks
+virst net-list
+```
 
