@@ -123,6 +123,6 @@ All script are asuming that you are *root* and running them in `/root`.
 
 ###Presets
 I suggest to checkout the repository e.g. in `/root/hetzner-kvm`
-Copy `/root/hetzner-kvm/guest.builder.example` to `/root/.guest.builder and edit it accordingly to your IP addresses and subnets
+Copy `/root/hetzner-kvm/guest.builder.example` to `/root/.guest.builder` and edit it accordingly to your IP addresses and subnets
 Copy `/root/hetzner-kvm/boot.sh` to `/root/boot.sh` and customize it to your needs. This is the file which is started at first boot.
 `
