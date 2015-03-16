@@ -28,13 +28,13 @@ if [ -z "${vm_fqdn}" ]; then
     exit 42
 fi
 
-#optional param
+# optional param
 if [ -z "${vm_guestip}" ]; then
     vm_guestip=$(dig $vm_fqdn +short)
 fi
 
 # mandatory if not resolvable by DNS
-if [ -z "${vm_ip}" ]; then
+if [ -z "${vm_guestip}" ]; then
     echo "ensure DNS resolution vm_fqdn or set env var 'vm_guestip' to the IP of the desired guest VM"
     exit 42
 fi
@@ -42,8 +42,7 @@ fi
 vm_hostname=$(echo $vm_fqdn |awk -F. '{ print $1 }')
 vm_domain=$(echo $vm_fqdn |awk -F. '{$1="";OFS="." ; print $0}' | sed 's/^.//')
 
-
-# Ubuntu suite, default 'utopic'
+# Ubuntu suite, default utopic
 if [ -z "${suite}" ]; then
     suite="utopic"
 fi
@@ -53,16 +52,16 @@ if [ -z "${guest_memory}" ]; then
     guest_memory=2
 fi
 
-# swap size in MB, equal to memoryzize
-swap_size=$(echo "${guest_memory}*1024" | bc)
+# swapsize in MB, equal to memoryzize
+swapsize=$(echo "${guest_memory}*1024" | bc)
 echo "swapsize = ${swapsize}"
 
 # memorysize in MB
-memory_size=$(echo "${guest_memory}*1024" | bc)
+memorysize=$(echo "${guest_memory}*1024" | bc)
 echo "memorysize = ${memorysize}"
 
-# rootfs size in MB
-rootfs_sizeKB=$(echo "${volsize}*1024-${swap_size}" | bc)
+# rootsize in MB
+rootsize=$(echo "${volsize}*1024-${swapsize}" | bc)
 echo "rootsize = ${rootsize}"
 
 user_pass=$(python -c "from passlib.utils import generate_password; print(generate_password(size=32))")
