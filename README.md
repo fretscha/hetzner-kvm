@@ -49,6 +49,7 @@ Please post an issue in case somthing won't work.
 
 ### Prepare the KVM host
 1. Login as user `root` and copy your public ssh key to the system.
+
    ```bash
    ssh root@host.example.tld
    exit
@@ -56,6 +57,7 @@ Please post an issue in case somthing won't work.
    ssh root@host.example.tld # without password
    ```
 1. Add the second disk to the volume group
+
    ```bash
    parted -a optimal /dev/sdb mkpart primary 0% 100%
    parted -s /dev/sdb set 1 lvm on
