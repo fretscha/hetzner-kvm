@@ -89,7 +89,7 @@ sysctl -p /etc/sysctl.conf
 ```
 
 To add a public network `public1` to the configuration save the following to `public100.xml`. Replace The IP address and netmask with the one you recieved from Hetzner.
-```bash
+```xml
 <network>
   <name>public100</name>
   <forward dev='eth0' mode='route'>
