@@ -1,0 +1,7 @@
+netmask=255.255.255.240
+broadcast=169.120.65.127
+gateway=169.120.65.113
+vm_network=public100
+
+#HostMin:   169.120.65.113
+#HostMax:   169.120.65.126

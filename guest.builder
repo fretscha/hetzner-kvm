@@ -13,7 +13,7 @@ PROGNAME=${0##*/}
 VERSION="1.0.0"
 
 source ~/.guest_builder
-# mandatory variables :  netmask, broadcast, gateway
+# mandatory variables :  netmask, broadcast, gateway, vm_network
 
 
 # disk size in GB
@@ -89,7 +89,7 @@ ubuntu-vm-builder kvm trusty \
  --debug \
  --arch amd64 \
  --domain $vm_domain \
- --hostname $vm_guest \
+ --hostname $vm_hostname \
  --tmpfs - \
  --kernel-flavour server \
  --mem $memorysize \
@@ -101,11 +101,11 @@ ubuntu-vm-builder kvm trusty \
  --user deploy \
  --pass $user_pass \
  --ssh-key /root/.ssh/authorized_keys \
- --network public1 \
+ --network $vm_network \
  --ip $vm_guestip \
- --mask ${netmask} \
- --bcast ${broadcast} \
- --gw ${gateway} \
+ --mask $netmask \
+ --bcast $broadcast \
+ --gw $gateway \
  --mirror http://mirror.hetzner.de/ubuntu/packages \
  --addpkg acpid \
  --addpkg openssh-server \
@@ -117,10 +117,10 @@ sleep 5
 
 echo
 
-#change to fqdn libvirt name
-virsh dumpxml $vm_guest > $vm_fqdn.xml
-virsh undefine $vm_guest
-sed -i "s/<name>$vm_guest<\/name>/<name>$vm_fqdn<\/name>/g" $vm_fqdn.xml
+#change libvirt name to fqdn
+virsh dumpxml $vm_hostname > $vm_fqdn.xml
+virsh undefine $vm_hostname
+sed -i "s/<name>$vm_hostname<\/name>/<name>$vm_fqdn<\/name>/g" $vm_fqdn.xml
 virsh define $vm_fqdn.xml
 
 virsh start $vm_fqdn
