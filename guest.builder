@@ -111,8 +111,7 @@ ubuntu-vm-builder kvm trusty \
  --addpkg openssh-server \
  --addpkg git \
  --addpkg aptitude \
- --addpkg linux-image-generic \
- --addpkg salt-minion ;
+ --addpkg linux-image-generic ;
 sleep 5
 
 echo
