@@ -121,10 +121,21 @@ virst net-list
 ## Running the guest.build script
 All script are asuming that you are *root* and running them in `/root`.
 
-###Presets
+### Presets
 I suggest to checkout the repository e.g. in `/root/hetzner-kvm`
 
 Copy `/root/hetzner-kvm/guest.builder.example` to `/root/.guest.builder` and edit it accordingly to your IP addresses and subnets
 
-Copy `/root/hetzner-kvm/boot.sh` to `/root/boot.sh` and customize it to your needs. This is the file which is started at first boot.
-`
+Copy `/root/hetzner-kvm/boot.sh` to `/root/boot.sh` and customize it to your needs. This is the file which is started at first boot of the guest.
+
+### Building a kvm guest
+The script `guest.builder` does **not** take any command line arguments. All configurations are either conigured in the `/root/.guest.builder` file or set as envrionnement variables.
+
+Mandatory are
+* vm_fqdn - host.domain.tkd
+* volsize - Virtual Disk szize in GB
+
+Example :
+```bash
+vm_fqdn=host.domain.tld volsize=8 ./guest.builder
+```
